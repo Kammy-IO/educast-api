@@ -1,0 +1,85 @@
+
+
+user
+
+	student
+		id
+		userUID
+		nickname
+		address
+		gender
+		grade
+		dob
+
+	instructor
+		id
+		userUID
+		businessname
+		address
+
+
+course
+	id
+	instructorid
+	title
+	details
+	shortdesc
+	category
+	subject
+	fromgrade
+	tograde
+	seats_max
+	seats_min
+	fee
+	
+schedule
+	id
+	courseid
+	type
+	start_dt
+	end_dt
+	recurrence
+		type
+		typedesc
+		repeat_interval
+		weekly_day
+		monthly_day
+		monthly_week
+		monthly_weekday
+	timezone
+	seats_remaining
+	seats_filled
+
+
+enrollment
+	id
+	studentid
+	scheduleid
+	courseid
+	purchaseid
+	isenrolled
+
+purchase
+	id
+	studentid
+	invoiceid
+	courseid
+	scheduleid
+	payment_dt
+	payment_status
+
+invoice
+	id
+	status
+	course_fee
+	service_fee
+	GST
+	total_amt_due
+	total_amt_paid
+	transactionid (payment gateway id)
+
+
+
+
+
+
