@@ -1,0 +1,218 @@
+Enrollment:
+student: {
+    id,
+    name,
+},
+courses: Map [{
+    course_id,
+    course_title,
+    teacher_id: Reference,
+}]
+classes: List of Map [{
+    class_id,
+    classes,
+}]
+SubCollection:
+
+
+Session:
+students_attended: Array[
+
+]
+students_enrolled: Array[
+
+]
+class_id
+course_id
+attended?
+start_datetime:
+end_datetime:
+
+
+db.collection('Enrollment').where('student.id','==','idstrng'
+Return one enrollment document
+db.collection('profile').where('courses_enrolled.course_id','==','g56ksf8989')
+db.collection('enrollment').where('courses.teacher_id','==','teacher_id')  
+db.collection('enrollment').where('classes','==','teacher_id')  
+
+Profile:
+    id: doc_id,
+    name: Map {
+        first_name: String,
+        last_name: String
+    },
+    grade: Number,
+    email_id: String,
+    favorite_category: Array,
+    avatar: String,
+    mobile_number: Numbers,
+    country_code: String,
+    uuid: reference,
+    created_date: datetime,
+    last_updated_date: datetime,
+    created_by: String,\\
+    last_updated_by: String
+    active: Boolean
+    account_id: Reference
+    courses_enrolled: List of Map [{
+        course_id: Reference,
+        class_ids: Array,
+        course_title: String,
+        institute_name: String,
+        teacher_name: String,
+        delivery_method: String,
+        category: String,
+        session_progress: ????
+    }]
+    courses_completed: Map {
+        course_id: Reference,
+        course_title: String,
+        institute_name: String,
+        teacher_name: String,
+        delivery_method: String,
+        category: String
+    }
+
+
+for each courses -> course
+   course.classes
+   course.classes.days_in_week.contains(today)
+
+Courses:
+    title: String,
+    description: String,
+    details: String,
+    delivery_method: String,
+    institute_name: String,
+    teacher_name: String,
+    techer_id: Reference,
+    category: Array,
+    from_grade: Number,
+    to_grade: Number,
+    number_of_sessions: Number (Auto calculated/Manual)
+    Classes: Sub Collection
+        id: Reference
+        fee: Number 
+        duration_in_months: Number (should we show it to user?)
+        duration_in_weeks: Number,
+        duration_in_days: Number,
+        start_date: Date,
+        end_date: Date,
+        start_time: String,
+        end_time: String,
+        days_in_week: Array,
+        active: Boolean,
+        max_seats: Number, 
+        seats_filled: Number (Counter, cloud function)
+        seats_remaining: Number,
+        meeting: Map { // Meeting to be discussed
+          meeting_link: String,
+        },
+        students_enrolled: {
+            uuid: Reference,
+            student_name: String,
+            account_id: String
+        }
+    created_date: datetime,
+    last_updated_date: datetime,
+    created_by: String,
+    last_updated_by: String,
+    active: Boolean,
+    items_required: String,
+    level: Number,
+    rating: Number (Decimal)
+    poster: String,
+    gallery_thumbnails: Array, 
+    promo_video_url: String,
+    Gallery: Sub Collection
+        image_url: String
+        image_description: String
+    Reviews/Rating: Sub Collection
+        reviewed_by: Map {
+            full_name: String,
+            uuid: Reference
+        }
+        review_text: String,
+        rating: Number
+
+
+
+Institute
+    id: id
+    name: String
+    address: Map {
+        door_number: Number
+        street_name: String
+        land_mark: String
+        area: String
+        locality: String
+        district: String
+        state: String
+        pin_code: Number
+    }
+    teachers: List of Map [{
+        teacher_id: Reference
+        name: {
+            first_name: String
+            last_name: String
+        },
+        speciality: String,
+        active: Boolean,
+    }]
+    created_date: datetime,
+    last_updated_date: datetime,
+    created_by: String,
+    last_updated_by: String,
+    active: Boolean
+
+
+Teacher
+    id:
+    name: Map {
+        first_name: String
+        last_name: String
+    },
+    speciality_category: Array
+    bio: String
+    institutes_associated: List of Maps [
+        {
+            institute_id: Reference
+            institute_name: String
+        }
+    ]
+    mobile_number: Number,
+    country_code: Number,
+    address: Map {
+        door_number: Number
+        street_name: String
+        land_mark: String
+        area: String
+        locality: String
+        district: String
+        state: String
+        pin_code: Number
+    }
+    years_of_experience: Number
+    courses: List of Maps [{
+        course_id: Reference
+        course_title: String
+        delivery_method: String
+        category: String
+        institute_name: String
+    }],
+    created_date: datetime,
+    last_updated_date: datetime,
+    created_by: String,
+    last_updated_by: String,
+    active: Boolean
+
+Invoice?? Razorpay sends an email with the invoice
+Payments? Subscription end_date in Profile
+Customer Activity Logging?
+Attendance?? Maintained in session table.
+
+
+Keeping an item in its own collection requires "composite index"
+For reviews, keep them in sub collection, but to show top 10 reviews along with the courses, need to create "Review Snippets"
+
+https://www.youtube.com/watch?v=haMOUb3KVSo
