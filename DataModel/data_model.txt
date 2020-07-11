@@ -1,4 +1,5 @@
 Enrollment:
+------------------
 student: {
     id,
     name,
@@ -12,30 +13,52 @@ classes: List of Map [{
     class_id,
     classes,
 }]
-SubCollection:
+active: boolean,
+created_date: datetime,
+last_updated_date: datetime,
+created_by: String,
+last_updated_by: String
 
 
 Session:
+------------------
+id: session_id,
+course_id: list of map{
+		course_id: reference
+		course_title: string
+	},
+class: list of map{
+		class_id: reference
+	}
+teacher: list of map{
+	teacher_id: reference
+	teacher_name
+}
 students_attended: Array[
-
 ]
 students_enrolled: Array[
-
 ]
-class_id
-course_id
-attended?
-start_datetime:
-end_datetime:
+date_of_session: datetime(date)
+start_time: datetime
+end_time: datetime
+session_started: boolean
+created_date: datetime,
+last_updated_date: datetime,
+created_by: String,
+last_updated_by: String
+active: Boolean
 
 
+------------------
 db.collection('Enrollment').where('student.id','==','idstrng'
 Return one enrollment document
 db.collection('profile').where('courses_enrolled.course_id','==','g56ksf8989')
 db.collection('enrollment').where('courses.teacher_id','==','teacher_id')  
 db.collection('enrollment').where('classes','==','teacher_id')  
+------------------
 
 Profile:
+------------------
     id: doc_id,
     name: Map {
         first_name: String,
@@ -73,12 +96,16 @@ Profile:
         category: String
     }
 
-
+------------------
 for each courses -> course
    course.classes
    course.classes.days_in_week.contains(today)
+------------------
+
+
 
 Courses:
+------------------
     title: String,
     description: String,
     details: String,
@@ -136,8 +163,8 @@ Courses:
         rating: Number
 
 
-
-Institute
+Institute:
+------------------
     id: id
     name: String
     address: Map {
@@ -166,7 +193,8 @@ Institute
     active: Boolean
 
 
-Teacher
+Teacher:
+------------------
     id:
     name: Map {
         first_name: String
